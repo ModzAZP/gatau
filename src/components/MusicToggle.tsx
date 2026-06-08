@@ -4,7 +4,6 @@ import '../styles/MusicToggle.css';
 function MusicToggle() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioContextRef = useRef<AudioContext | null>(null);
-  const oscillatorRef = useRef<OscillatorNode | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
   const intervalRef = useRef<number | null>(null);
 
