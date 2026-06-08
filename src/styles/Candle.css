@@ -2,6 +2,9 @@
   position: relative;
   cursor: pointer;
   transition: transform 0.2s ease;
+  display: inline-block; /* Memastikan container seukuran lilin */
+  height: 50px;          /* Samakan dengan tinggi stick */
+  width: 12px;           /* Samakan dengan lebar stick */
 }
 
 .candle:hover {
@@ -40,16 +43,19 @@
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  height: 10px;
+  height: 8px;
   background: linear-gradient(180deg, #2d2d2d, #4a4a4a);
   border-radius: 1px;
 }
 
+/* PERBAIKAN: Mengatur posisi api tepat di atas sumbu lilin */
 .flame-container {
   position: absolute;
-  top: -45px;
+  bottom: 100%; /* Mulai tepat di ujung atas candle-stick */
   left: 50%;
   transform: translateX(-50%);
+  margin-bottom: 6px; /* Memberi jarak halus dari sumbu */
+  z-index: 2;
 }
 
 .flame {
@@ -63,6 +69,7 @@
     0 0 20px rgba(255, 152, 0, 0.8),
     0 0 40px rgba(255, 152, 0, 0.4),
     0 0 60px rgba(255, 87, 34, 0.2);
+  transform-origin: bottom center; /* Animasi berpusat di bawah api */
 }
 
 .flame-inner {
@@ -87,15 +94,16 @@
   background: radial-gradient(circle, rgba(255, 193, 7, 0.4) 0%, transparent 70%);
   border-radius: 50%;
   animation: glow-pulse 1s ease-in-out infinite;
+  pointer-events: none; /* Supaya tidak mengganggu klik lilin */
 }
 
 @keyframes flicker {
   0% {
-    transform: translateX(-50%) scale(1) rotate(-2deg);
+    transform: scale(1) rotate(-2deg);
     height: 28px;
   }
   100% {
-    transform: translateX(-50%) scale(1.05) rotate(2deg);
+    transform: scale(1.05) rotate(2deg);
     height: 30px;
   }
 }
@@ -127,15 +135,15 @@
 @keyframes blow-out {
   0% {
     opacity: 1;
-    transform: translateX(-50%) scale(1);
+    transform: scale(1);
   }
   50% {
     opacity: 0.5;
-    transform: translateX(-50%) scale(1.5, 0.5) rotate(10deg);
+    transform: scale(1.5, 0.5) rotate(10deg);
   }
   100% {
     opacity: 0;
-    transform: translateX(-50%) scale(0);
+    transform: scale(0);
   }
 }
 
@@ -147,17 +155,20 @@
   background: linear-gradient(180deg, #1a1a1a, #2d2d2d);
 }
 
+/* Responsif untuk Mobile */
 @media (max-width: 480px) {
+  .candle {
+    width: 10px;
+    height: 40px;
+  }
   .candle-stick {
     width: 10px;
     height: 40px;
   }
-  
   .flame {
     width: 12px;
     height: 24px;
   }
-  
   .flame-inner {
     width: 5px;
     height: 12px;
