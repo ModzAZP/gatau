@@ -1,21 +1,23 @@
 import Candle from './Candle';
 import '../styles/BirthdayCake.css';
 
+// UBAH: Sesuaikan tipe data props
 interface BirthdayCakeProps {
-  candlesLit: number;
-  onBlowOut: () => void;
+  candles: boolean[]; 
+  onBlowOut: (index: number) => void; 
   allBlownOut: boolean;
 }
 
-function BirthdayCake({ candlesLit, onBlowOut, allBlownOut }: BirthdayCakeProps) {
+function BirthdayCake({ candles, onBlowOut, allBlownOut }: BirthdayCakeProps) {
   return (
     <div className="cake-wrapper">
       <div className="candles-container">
-        {[...Array(5)].map((_, i) => (
+        {/* UBAH: Looping langsung dari array state candles */}
+        {candles.map((isLit, i) => (
           <Candle 
             key={i}
-            isLit={i < candlesLit}
-            onBlowOut={onBlowOut}
+            isLit={isLit}
+            onBlowOut={() => onBlowOut(i)} // Mengirimkan info lilin indeks mana yang diklik
             delay={i * 0.1}
           />
         ))}
