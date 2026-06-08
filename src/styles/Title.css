@@ -1,0 +1,74 @@
+.title-container {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(3rem, 12vw, 6rem);
+  line-height: 1.1;
+  color: #fff;
+  text-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.5),
+    0 0 20px rgba(255, 215, 0, 0.3),
+    0 0 40px rgba(255, 215, 0, 0.2);
+}
+
+.title-line {
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+
+.title-line.birthday {
+  color: #ffd700;
+  animation-delay: 0.5s;
+}
+
+.decorative-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.line {
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent);
+}
+
+.star {
+  font-size: 1.2rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 3.5rem;
+  }
+  
+  .line {
+    width: 60px;
+  }
+}
