@@ -54,7 +54,7 @@
   bottom: 100%; /* Mulai tepat di ujung atas candle-stick */
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 6px; /* Memberi jarak halus dari sumbu */
+  margin-bottom: 2px; /* Dikecilkan sedikit agar api menyentuh sumbu hitam */
   z-index: 2;
 }
 
@@ -69,7 +69,7 @@
     0 0 20px rgba(255, 152, 0, 0.8),
     0 0 40px rgba(255, 152, 0, 0.4),
     0 0 60px rgba(255, 87, 34, 0.2);
-  transform-origin: bottom center; /* Animasi berpusat di bawah api */
+  transform-origin: bottom center; 
 }
 
 .flame-inner {
@@ -99,11 +99,11 @@
 
 @keyframes flicker {
   0% {
-    transform: scale(1) rotate(-2deg);
+    transform: translateX(-50%) scale(1) rotate(-2deg);
     height: 28px;
   }
   100% {
-    transform: scale(1.05) rotate(2deg);
+    transform: translateX(-50%) scale(1.05) rotate(2deg);
     height: 30px;
   }
 }
@@ -132,18 +132,19 @@
   animation: blow-out 0.3s ease-out forwards;
 }
 
+/* PERBAIKAN JUGA PADA ANIMASI BLOW OUT */
 @keyframes blow-out {
   0% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateX(-50%) scale(1);
   }
   50% {
     opacity: 0.5;
-    transform: scale(1.5, 0.5) rotate(10deg);
+    transform: translateX(-50%) scale(1.5, 0.5) rotate(10deg);
   }
   100% {
     opacity: 0;
-    transform: scale(0);
+    transform: translateX(-50%) scale(0);
   }
 }
 
