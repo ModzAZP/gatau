@@ -4,14 +4,19 @@
   flex-direction: column;
   align-items: center;
   margin: 1rem 0;
+  padding-top: 40px; /* Memberi ruang agar api lilin paling atas tidak terpotong */
 }
 
+/* PERBAIKAN 1: Menyelaraskan lebar container lilin dengan kue */
 .candles-container {
   display: flex;
-  gap: 1.5rem;
-  margin-bottom: -10px;
+  justify-content: center;
+  align-items: flex-end; /* Memastikan semua lilin menapak rata bawah */
+  gap: 8px;              /* Jarak dikecilkan agar pas di dalam area kue */
+  margin-bottom: -6px;   /* Lilin ditarik sedikit ke bawah agar 'tertancap' */
   position: relative;
   z-index: 10;
+  width: 120px;          /* Disamakan dengan lebar .layer-top */
 }
 
 .cake {
@@ -23,16 +28,17 @@
 
 .cake-layer {
   position: relative;
-  border-radius: 10px;
   box-shadow: 
     inset 0 -5px 10px rgba(0, 0, 0, 0.1),
     0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* PERBAIKAN 2: Border radius hanya di atas agar lilin tidak melayang di lengkungan bawah */
 .layer-top {
   width: 120px;
   height: 60px;
   background: linear-gradient(180deg, #ff9a9e 0%, #fecfef 100%);
+  border-radius: 12px 12px 0 0; 
   z-index: 3;
 }
 
@@ -40,6 +46,7 @@
   width: 160px;
   height: 70px;
   background: linear-gradient(180deg, #a18cd1 0%, #fbc2eb 100%);
+  border-radius: 12px 12px 0 0;
   margin-top: -5px;
   z-index: 2;
 }
@@ -48,17 +55,19 @@
   width: 200px;
   height: 80px;
   background: linear-gradient(180deg, #ffecd2 0%, #fcb69f 100%);
+  border-radius: 12px 12px 0 0;
   margin-top: -5px;
   z-index: 1;
 }
 
+/* Frosting (Scream) menyesuaikan lengkungan atas kue */
 .frosting {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 15px;
-  border-radius: 10px 10px 0 0;
+  border-radius: 12px 12px 0 0;
 }
 
 .frosting-top {
@@ -121,22 +130,23 @@
 .stripe-3 { left: 55%; }
 .stripe-4 { left: 75%; }
 
+/* PERBAIKAN 3: Piring dibuat berbentuk oval pipih yang manis */
 .plate {
   width: 240px;
-  height: 15px;
-  background: linear-gradient(180deg, #d4d4d4, #a0a0a0);
-  border-radius: 50%;
-  margin-top: -5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  height: 14px;
+  background: linear-gradient(180deg, #f0f0f0, #c8c8c8);
+  border-radius: 100px / 14px; /* Membuat lengkungan piring proporsional */
+  margin-top: -6px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 .smoke-container {
   position: absolute;
-  top: -30px;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .smoke {
@@ -175,13 +185,21 @@
   }
 }
 
+/* PERBAIKAN 4: Responsif Ukuran Mobile (HP) */
 @media (max-width: 480px) {
   .candles-container {
-    gap: 1rem;
+    width: 100px; /* Ikut mengecil seukuran layer-top mobile */
+    gap: 4px;     /* Merapatkan lilin agar tidak meluber keluar kue */
+    margin-bottom: -5px;
   }
   
   .layer-top { width: 100px; height: 50px; }
   .layer-middle { width: 130px; height: 60px; }
   .layer-bottom { width: 160px; height: 65px; }
-  .plate { width: 200px; }
+  
+  .plate { 
+    width: 190px; 
+    height: 10px;
+    border-radius: 100px / 10px;
+  }
 }
