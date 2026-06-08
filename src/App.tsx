@@ -7,25 +7,32 @@ import Message from './components/Message';
 import './styles/App.css';
 
 function App() {
-  const [candlesLit, setCandlesLit] = useState(5);
+  // 1. UBAH: State berupa array boolean [true, true, true, true, true]
+  const [candles, setCandles] = useState<boolean[]>([true, true, true, true, true]);
   const [allBlownOut, setAllBlownOut] = useState(false);
   const [showWish, setShowWish] = useState(false);
 
+  // 2. Hitung berapa banyak lilin yang masih menyala (true)
+  const activeCandlesCount = candles.filter(isLit => isLit).length;
+
   useEffect(() => {
-    if (candlesLit === 0 && !allBlownOut) {
+    // Jika jumlah lilin yang menyala sudah 0
+    if (activeCandlesCount === 0 && !allBlownOut) {
       setAllBlownOut(true);
       setTimeout(() => setShowWish(true), 500);
     }
-  }, [candlesLit, allBlownOut]);
+  }, [activeCandlesCount, allBlownOut]);
 
-  const blowOutCandle = () => {
-    if (candlesLit > 0) {
-      setCandlesLit(prev => prev - 1);
-    }
+  // 3. UBAH: Matikan lilin spesifik berdasarkan indeks yang diklik
+  const blowOutCandle = (indexToBlow: number) => {
+    setCandles(prevCandles => 
+      prevCandles.map((isLit, i) => (i === indexToBlow ? false : isLit))
+    );
   };
 
+  // 4. UBAH: Reset semua lilin kembali ke true
   const resetCandles = () => {
-    setCandlesLit(5);
+    setCandles([true, true, true, true, true]);
     setAllBlownOut(false);
     setShowWish(false);
   };
@@ -53,8 +60,9 @@ function App() {
       <main className="container">
         <Title />
         
+        {/* OPER PROPS BARU KE BIRTHDAYCAKE */}
         <BirthdayCake 
-          candlesLit={candlesLit} 
+          candles={candles} 
           onBlowOut={blowOutCandle}
           allBlownOut={allBlownOut}
         />
