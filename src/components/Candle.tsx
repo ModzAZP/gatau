@@ -10,7 +10,6 @@ interface CandleProps {
 function Candle({ isLit, onBlowOut, delay }: CandleProps) {
   const [isBlowing, setIsBlowing] = useState(false);
 
-  // PERBAIKAN: Sinkronisasi status blowing jika lilin di-reset dari luar (tombol reset)
   useEffect(() => {
     if (isLit) {
       setIsBlowing(false);
@@ -18,11 +17,8 @@ function Candle({ isLit, onBlowOut, delay }: CandleProps) {
   }, [isLit]);
 
   const handleClick = () => {
-    // Jika lilin masih menyala dan sedang tidak dalam proses ditiup
     if (isLit && !isBlowing) {
       setIsBlowing(true);
-      
-      // Jalankan fungsi padam dari parent (App.tsx) SEGERA agar indeks tidak tertukar
       onBlowOut(); 
     }
   };
@@ -37,9 +33,7 @@ function Candle({ isLit, onBlowOut, delay }: CandleProps) {
         <div className="candle-stripe"></div>
         <div className="wick"></div>
       </div>
-      {/* PERBAIKAN: Api tetap dirender saat isBlowing=true 
-        agar animasi 'blow-out' di CSS sempat berjalan dengan mulus 
-      */}
+      
       {(isLit || isBlowing) && (
         <div className="flame-container">
           <div className="flame">
