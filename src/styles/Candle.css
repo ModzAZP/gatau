@@ -1,10 +1,14 @@
+/* CONTAINER UTAMA LILIN */
 .candle {
   position: relative;
   cursor: pointer;
   transition: transform 0.2s ease;
-  display: inline-block; /* Memastikan container seukuran lilin */
-  height: 50px;          /* Samakan dengan tinggi stick */
-  width: 12px;           /* Samakan dengan lebar stick */
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* KUNCI: Menjamin sumbu, stick, dan api rata tengah sempurna */
+  justify-content: flex-end;
+  height: 85px;           /* Ditambah agar ada ruang untuk api di atas stick */
+  width: 14px;            /* Diperlebar sedikit agar area klik di HP lebih nyaman */
 }
 
 .candle:hover {
@@ -15,6 +19,7 @@
   transform: scale(0.95);
 }
 
+/* BATANG LILIN */
 .candle-stick {
   width: 12px;
   height: 50px;
@@ -48,14 +53,15 @@
   border-radius: 1px;
 }
 
-/* PERBAIKAN: Mengatur posisi api tepat di atas sumbu lilin */
+/* KONTAINER API (MEMANFAATKAN STRUKTUR FLEX OVERLAY) */
 .flame-container {
   position: absolute;
-  bottom: 100%; /* Mulai tepat di ujung atas candle-stick */
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 2px; /* Dikecilkan sedikit agar api menyentuh sumbu hitam */
+  bottom: 54px; /* Duduk pas di atas batas lilin dan membakar sumbu */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   z-index: 2;
+  pointer-events: none; /* Supaya klik mendeteksi lilin di bawahnya */
 }
 
 .flame {
@@ -94,58 +100,32 @@
   background: radial-gradient(circle, rgba(255, 193, 7, 0.4) 0%, transparent 70%);
   border-radius: 50%;
   animation: glow-pulse 1s ease-in-out infinite;
-  pointer-events: none; /* Supaya tidak mengganggu klik lilin */
 }
 
+/* KANAL ANIMASI AMAN TANPA TRANSLATE-X */
 @keyframes flicker {
-  0% {
-    transform: translateX(-50%) scale(1) rotate(-2deg);
-    height: 28px;
-  }
-  100% {
-    transform: translateX(-50%) scale(1.05) rotate(2deg);
-    height: 30px;
-  }
+  0% { transform: scale(1) rotate(-2deg); height: 28px; }
+  100% { transform: scale(1.05) rotate(2deg); height: 30px; }
 }
 
 @keyframes flicker-inner {
-  0% {
-    transform: translateX(-50%) scale(1);
-  }
-  100% {
-    transform: translateX(-50%) scale(0.9);
-  }
+  0% { transform: translateX(-50%) scale(1); }
+  100% { transform: translateX(-50%) scale(0.9); }
 }
 
 @keyframes glow-pulse {
-  0%, 100% {
-    opacity: 0.8;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2);
-  }
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
 }
 
 .candle.blowing .flame {
   animation: blow-out 0.3s ease-out forwards;
 }
 
-/* PERBAIKAN JUGA PADA ANIMASI BLOW OUT */
 @keyframes blow-out {
-  0% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: translateX(-50%) scale(1.5, 0.5) rotate(10deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) scale(0);
-  }
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5, 0.5) rotate(10deg); }
+  100% { opacity: 0; transform: scale(0); }
 }
 
 .candle.out .candle-stick {
@@ -156,15 +136,18 @@
   background: linear-gradient(180deg, #1a1a1a, #2d2d2d);
 }
 
-/* Responsif untuk Mobile */
+/* PERBAIKAN RESPONSIF HP: Menjaga Keseimbangan Titik Tengah */
 @media (max-width: 480px) {
   .candle {
-    width: 10px;
-    height: 40px;
+    height: 70px;
+    width: 12px;
   }
   .candle-stick {
     width: 10px;
     height: 40px;
+  }
+  .flame-container {
+    bottom: 44px; /* Menurunkan posisi api agar pas dengan tinggi stick HP (40px) */
   }
   .flame {
     width: 12px;
