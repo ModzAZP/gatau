@@ -32,10 +32,14 @@ function Candle({ isLit, onBlowOut, delay }: CandleProps) {
       <div className="candle-stick">
         <div className="candle-stripe"></div>
         <div className="wick"></div>
+        
+        {/* TAMBAHKAN: Elemen asap di sini, dia otomatis mengepul saat class 'out' aktif */}
+        {!isLit && <div className="candle-smoke"></div>}
       </div>
       
+      {/* Jika menyala, render api beserta glow-nya */}
       {(isLit || isBlowing) && (
-        <div className="flame-container">
+        <div className={`flame-container ${isLit ? 'active' : 'hidden'}`}>
           <div className="flame">
             <div className="flame-inner"></div>
           </div>
