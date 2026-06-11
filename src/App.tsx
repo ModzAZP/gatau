@@ -71,7 +71,7 @@ function App() {
         
         {allBlownOut && (
           <button className="reset-btn" onClick={resetCandles}>
-            🎂 Light Candles Again
+            Light Candles Again
           </button>
         )}
         
