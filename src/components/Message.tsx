@@ -9,15 +9,12 @@ function Message({ showWish }: MessageProps) {
     <div className={`message-container ${showWish ? 'visible' : ''}`}>
       <div className="message-card">
         <p className="message-text">
-          🌟 May all your dreams come true! 🌟
+          May All Your Dreams Come True!
         </p>
         <p className="message-subtext">
-          Wishing you a year filled with love, happiness, and endless joy!
+          Wishing You A Year Filled With Love, Happiness, And Endless Joy!
         </p>
         <div className="message-hearts">
-          <span>💕</span>
-          <span>🎂</span>
-          <span>💕</span>
         </div>
       </div>
     </div>
