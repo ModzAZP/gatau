@@ -49,14 +49,6 @@ function BirthdayCake({ candles, onBlowOut, allBlownOut }: BirthdayCakeProps) {
         
         <div className="plate"></div>
       </div>
-      
-      {allBlownOut && (
-        <div className="smoke-container">
-          <div className="smoke smoke-1"></div>
-          <div className="smoke smoke-2"></div>
-          <div className="smoke smoke-3"></div>
-        </div>
-      )}
     </div>
   );
 }
