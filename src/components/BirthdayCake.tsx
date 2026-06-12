@@ -5,10 +5,9 @@ import '../styles/BirthdayCake.css';
 interface BirthdayCakeProps {
   candles: boolean[]; 
   onBlowOut: (index: number) => void; 
-  allBlownOut: boolean;
 }
 
-function BirthdayCake({ candles, onBlowOut, allBlownOut }: BirthdayCakeProps) {
+function BirthdayCake({ candles, onBlowOut }: BirthdayCakeProps) {
   return (
     <div className="cake-wrapper">
       <div className="candles-container">
